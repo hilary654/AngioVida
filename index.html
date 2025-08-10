@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AngioVida </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    header { 
+      background: linear-gradient(135deg, #0077be, #009fe3); 
+      color: #fff; 
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+    
+    .logo h1 {
+      font-size: 1.8em;
+      font-weight: 300;
+    }
+    
+    .header-logo {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .header-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+    
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+    
+    nav a { 
+      color: #fff; 
+      text-decoration: none; 
+      font-weight: 500;
+      transition: color 0.3s ease;
+      padding: 10px 0;
+      border-bottom: 2px solid transparent;
+    }
+    
+    nav a:hover {
+      color: #ffce00;
+      border-bottom-color: #ffce00;
+    }
+    
+    .cta-button {
+      background: #fff;
+      color: #0077be;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .cta-button:hover {
+      background: #ffce00;
+      color: #000;
+      transform: translateY(-2px);
+    }
+    
+    .hero { 
+      background: linear-gradient(rgba(0,119,190,0.85), rgba(0,159,227,0.85)), url('https://images.steamusercontent.com/ugc/970975681534960830/09F0C2E235FD3896C1DD295AC4D1A13C3DC50457/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false') center/cover no-repeat; 
+      color: #fff;
+      padding: 150px 20px 100px;
+      text-align: center;
+      margin-top: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.steamusercontent.com/ugc/970975681534960830/09F0C2E235FD3896C1DD295AC4D1A13C3DC50457/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false')center/cover no-repeat; 
+      color: #fff;
+      z-index: 0;
+    }
+    
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero h2 {
+      font-size: 3.5em;
+      font-weight: 300;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .hero p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-button {
+      background: #ffce00;
+      color: #000;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .hero-button:hover {
+      background: #e6b800;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .section { 
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section h2 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #0077be;
+      font-weight: 300;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.1em;
+      color: #666;
+      margin-bottom: 50px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .services, .doctors { 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .card { 
+      background: #fff;
+      border: none;
+      padding: 40px 30px;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .card i {
+      color: #0077be;
+      margin-bottom: 20px;
+    }
+    
+    .card h3 {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .card p {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      object-fit: cover;
+      border: 4px solid #e8f4fd;
+      align-self: center;
+    }
+    
+    .equipment-card {
+      background: #fff;
+      border: none;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    
+    .equipment-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .equipment-image {
+      width: 100%;
+      height: 200px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+    
+    .equipment-card h3 {
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .equipment-card p {
+      color: #666;
+      line-height: 1.6;
+      text-align: left;
+    }
+    
+    .protection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    
+    .protection-card {
+      background: #fff;
+      border: none;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+      border-left: 4px solid #0077be;
+    }
+    
+    .protection-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+    
+    .protection-image {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      object-fit: cover;
+    }
+    
+    .protection-card h4 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #0077be;
+    }
+    
+    .protection-card p {
+      color: #666;
+      line-height: 1.5;
+      font-size: 0.9em;
+      text-align: left;
+    }
+    
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+      margin-top: 30px;
+    }
+    
+    .about-text {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #555;
+    }
+    
+    .about-image {
+      text-align: center;
+    }
+    
+    .about-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+    
+    .clinic-tour-button {
+      background: linear-gradient(135deg, #0077be, #009fe3);
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0,119,190,0.3);
+    }
+    
+    .clinic-tour-button:hover {
+      background: linear-gradient(135deg, #005a8c, #007bb8);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,119,190,0.4);
+    }
+    
+    .clinic-tour-button i {
+      font-size: 1.2em;
+    }
+    
+    /* Estilos específicos para la sección de ubicación */
+    .location-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+      margin-top: 30px;
+    }
+    
+    .location-info {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #555;
+    }
+    
+    .location-map {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 350px;
+    }
+    
+    .location-map i {
+      font-size: 4em;
+      color: #0077be;
+      margin-bottom: 20px;
+    }
+    
+    .location-map h4 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+    }
+    
+    .location-map p {
+      color: #666;
+      margin-bottom: 25px;
+      font-size: 1em;
+    }
+    
+    .location-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+      text-align: center;
+    }
+    
+    .stat-item {
+      padding: 20px;
+    }
+    
+    .stat-number {
+      font-size: 3em;
+      font-weight: bold;
+      color: #0077be;
+      display: block;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+    
+    .welcome-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+    }
+    
+    .feature i {
+      color: #0077be;
+      font-size: 1.5em;
+      margin-top: 5px;
+    }
+    
+    .feature-content h4 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .feature-content p {
+      color: #666;
+      font-size: 0.95em;
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+    
+    .contact-item {
+      text-align: center;
+      padding: 30px;
+      background: #f8f9fa;
+      border-radius: 15px;
+    }
+    
+    .contact-item i {
+      color: #0077be;
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+    
+    .contact-item h4 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .contact-item p {
+      color: #666;
+    }
+    
+    footer { 
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: #fff;
+      text-align: center; 
+      padding: 50px 20px 30px;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: #ecf0f1;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #ffce00;
+    }
+    
+    .social-links {
+      margin: 30px 0;
+    }
+    
+    .social-links a {
+      color: #ecf0f1;
+      font-size: 1.5em;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: #ffce00;
+    }
+    
+    .bg-light {
+      background: #f8f9fa;
+    }
+    
+    .subsection {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 2px solid #e9ecef;
+    }
+    
+    .subsection h3 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: #0077be;
+      font-weight: 400;
+    }
+    
+    .subsection-subtitle {
+      text-align: center;
+      font-size: 1em;
+      color: #666;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .header-logo {
+        width: 60px;
+        height: 60px;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      .hero {
+        padding: 120px 20px 80px;
+      }
+      
+      .hero h2 {
+        font-size: 2.5em;
+      }
+      
+      .about-content,
+      .location-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .services, .doctors {
+        grid-template-columns: 1fr;
+      }
+      
+      .equipment-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .protection-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .location-features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="logo"><h1><i class="fas fa-heartbeat"></i> AngioVida</h1></div>
+    <nav>
+      <a href="#bienvenida">Bienvenida</a>
+      <a href="#sobre-nosotros">Sobre Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#equipos">Equipos</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#personal">Personal</a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 20px;">
+     <a href="citas.html" class="cta-button">Cita Online</a>
+      <div class="header-logo">
+        <img src="LOGO.jpeg" alt="AngioVida">
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="bienvenida" class="hero">
+  <h2>Bienvenidos a AngioVida</h2>
+  <p>Confianza que corre por tus venas.</p>
+  <a href="citas.html" class="hero-button">Reservar Cita</a>
+</section>
+
+<section id="sobre-nosotros" class="section">
+  <h2>Sobre Nosotros</h2>
+  <p class="section-subtitle">En AngioVida, ofrecemos una gama completa de servicios diseñados para el diagnóstico y tratamiento de enfermedades vasculares. Nuestro enfoque se centra en mejorar la calidad de vida de nuestros pacientes.</p>
+  
+  <div class="about-content">
+    <div class="about-text">
+      <h3 style="color: #0077be; margin-bottom: 20px;">Nuestra Misión</h3>
+      <p>Nuestra misión es proporcionar imágenes precisas de los vasos sanguíneos, lo que permite a los médicos tomar decisiones informadas sobre el manejo de estas condiciones.</p>
+      
+      <h3 style="color: #0077be; margin-bottom: 20px; margin-top: 30px;">Nuestra Visión</h3>
+      <p>Ser líderes angiografos en el diagnóstico y tratamiento de enfermedades vasculares, ofreciendo soluciones innovadoras y atención de la más alta calidad.</p>
+      
+      <h3 style="color: #0077be; margin-bottom: 20px; margin-top: 30px;">Nuestros Valores</h3>
+      <p>En nuestra clínica de angiografía, nos guiamos por tres valores fundamentales: el compromiso con la seguridad del paciente, asegurando procedimientos precisos y protegidos mediante el uso adecuado de tecnología y protocolos radiológicos; la excelencia profesional, a través de un equipo altamente capacitado y en constante actualización para ofrecer diagnósticos confiables y atención especializada; y la humanización de la atención, brindando un trato empático, respetuoso y cercano que garantice una experiencia médica digna y centrada en las necesidades de cada persona.</p>
+    </div>
+    <div class="about-image">
+      <img src="clinica.png" alt="">
+      <a href="tour-clinica.html" class="clinic-tour-button">
+        <i class="fas fa-play-circle"></i>
+        Vista de La Clínica
+      </a>
+    </div>
+  </div>
+  
+  <div class="stats">
+    <div class="stat-item">
+      <span class="stat-number">...</span>
+      <div class="stat-label">Años de Experiencia</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">2</span>
+      <div class="stat-label">Especialidades Médicas</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">5</span>
+      <div class="stat-label">Profesionales</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">...+</span>
+      <div class="stat-label">Pacientes Atendidos</div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light">
+  <h2>¿Por qué Elegirnos?</h2>
+  <div class="welcome-features">
+    <div class="feature">
+      <i class="fas fa-user-md"></i>
+      <div class="feature-content">
+        <h4>Profesionales Especializados</h4>
+        <p>Contamos con médicos altamente calificados y especialistas en cada área de nuestras especialidades.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <i class="fas fa-hospital"></i>
+      <div class="feature-content">
+        <h4>Instalaciones Modernas</h4>
+        <p>Equipos de última generación y instalaciones diseñadas para tu comodidad y seguridad.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <i class="fas fa-clock"></i>
+      <div class="feature-content">
+        <h4>Atención 24/7</h4>
+        <p>Servicios de emergencia disponibles las 24 horas del día, los 7 días de la semana.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <i class="fas fa-heart"></i>
+      <div class="feature-content">
+        <h4>Atención Personalizada</h4>
+        <p>Tratamiento individualizado y seguimiento continuo para cada paciente.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <i class="fas fa-shield-alt"></i>
+      <div class="feature-content">
+        <h4>Protocolos de Seguridad</h4>
+        <p>Cumplimos con los más altos estándares de seguridad y bioseguridad.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <i class="fas fa-mobile-alt"></i>
+      <div class="feature-content">
+        <h4>Tecnología Avanzada</h4>
+        <p>Sistema de citas online, historias clínicas digitales y telemedicina.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios" class="section">
+  <h2>Nuestros Servicios</h2>
+  <p class="section-subtitle">Ofrecemos una amplia gama de especialidades médicas para cuidar tu salud integral</p>
+  <div class="services">
+    <div class="card">
+      <i class="fas fa-baby fa-3x"></i>
+      <h3>Rayos X</h3>
+      <p>En nuestra clínica, contamos con tecnología de última generación y personal especializado para realizar estos estudios con alta precisión y mínima exposición a radiación. El procedimiento es realizado por tecnólogos en radiología y supervisado por médicos radiólogos, quienes interpretan los resultados para apoyar un diagnóstico oportuno y confiable.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-x-ray fa-3x"></i>
+      <h3>Angiografía</h3>
+      <p>En nuestra clínica, realizamos este procedimiento con equipos especializados y personal altamente capacitado, garantizando precisión y seguridad en cada estudio. La angiografía es fundamental para detectar obstrucciones, aneurismas, malformaciones vasculares y otras enfermedades del sistema circulatorio. El procedimiento es mínimamente invasivo, se realiza en una sala especializada y bajo supervisión médica directa, ofreciendo resultados confiables para una evaluación y tratamiento adecuados.</p>
+    </div>
+  </div>
+</section>
+
+<section id="equipos" class="section bg-light">
+  <h2>Nuestros Equipos</h2>
+  <p class="section-subtitle">Contamos con tecnología de vanguardia para ofrecer diagnósticos precisos y tratamientos seguros</p>
+  
+  <div class="equipment-grid">
+    <div class="equipment-card">
+      <img src="rayosx.webp" alt="Equipo de Rayos X Digital" class="equipment-image">
+      <h3>Equipo de Rayos X Digital</h3>
+      <p>Sistema digital de radiografía convencional con detector de panel plano, que permite obtener imágenes de alta resolución con menor exposición a radiación. Incluye mesa radiográfica multifuncional y sistema de procesamiento digital inmediato para diagnósticos rápidos y precisos.</p>
+    </div>
+    
+    <div class="equipment-card">
+      <img src="Angigrafo.jpg" alt="Angiógrafo Digital" class="equipment-image">
+      <h3>Angiógrafo Digital</h3>
+      <p>Equipo de angiografía digital de última generación con tecnología de sustracción digital, brazo en C motorizado y sistema de navegación 3D. Permite realizar procedimientos mínimamente invasivos con visualización en tiempo real de estructuras vasculares con máxima precisión y seguridad.</p>
+    </div>
+    
+    <div class="equipment-card">
+      <img src="pacs.jpg" alt="Sistema PACS" class="equipment-image">
+      <h3>Sistema PACS</h3>
+      <p>Sistema de archivo y comunicación de imágenes médicas (PACS) que permite el almacenamiento, visualización y distribución digital de estudios radiológicos. Integrado con sistema RIS para gestión completa de reportes e historial clínico digital.</p>
+    </div>
+  </div>
+
+  <!-- Subsección de Equipos de Protección Radiológica -->
+  <div class="subsection">
+    <h3>Equipos de Protección Radiológica</h3>
+    <p class="subsection-subtitle">Contamos con un sistema completo de protección radiológica que garantiza la seguridad tanto del personal médico como de los pacientes durante todos los procedimientos</p>
+    
+    <div class="protection-grid">
+      <div class="protection-card">
+        <img src="chaleco.jpeg" alt="Chaleco Plomado" class="protection-image">
+        <h4>Chaleco Plomado</h4>
+        <p>• Marca y modelo: Infab Revolution Full Wrap Lead Apron (modelo 203).
+        <br>• Plomo: Espesor no especificado, diseño full-wrap para máxima cobertura.</p>
+      </div>
+      
+      <div class="protection-card">
+        <img src="gafas.jpeg" alt="Gafas Plomadas" class="protection-image">
+        <h4>Gafas Plomadas</h4>
+        <p>• Marca y modelo: AttenuTech / Nike Brazen Radiation Glasses.
+        <br>• Plomo: Equivalencia frontal de 0.75 mm Pb.</p>
+      </div>
+      
+      <div class="protection-card">
+        <img src="collar.jpeg" alt="Collarín Tiroideo" class="protection-image">
+        <h4>Collarín Tiroideo</h4>
+        <p>• Marca y modelo: Infab Revolution Thyroid Collar (REV TC).
+        <br>• Plomo: Opciones de 0.25 mm, 0.35 mm o 0.50 mm Pb (elige mínimo 0.5 mm para máxima protección)</p>
+      </div>
+      
+      <div class="protection-card">
+        <img src="gonada.jpeg" alt="Protector de Gónadas" class="protection-image">
+        <h4>Protector de Gónadas</h4>
+        <p>• Marca y modelo: AttenuTech Gonad/Ovarian Lead Shield (set unisex).
+        <br>• Plomo: 0.50 mm Pb equivalencia</p>
+      </div>
+      
+      <div class="protection-card">
+        <img src="guantes.jpeg" alt="Guantes Plomados" class="protection-image">
+        <h4>Guantes Plomados</h4>
+        <p>• Marca y modelo: Proguard RR2 Radiation-Attenuating Gloves
+        <br>• Espesor de plomo equivalente: 0.07 mm Pb eq. (a 60 kVp)
+        <br>• Espesor físico real: ~0.28 mm</p>
+      </div>
+      
+      <div class="protection-card">
+        <img src="pared.jpeg" alt="Paredes Plomadas" class="protection-image">
+        <h4>Paredes Plomadas</h4>
+        <p>• Marca: Lead Glass Pro
+        <br>• Modelo: Lead Lined Drywall Sheetrock
+        <br>• Espesor de plomo: 2 mm Pb equivalentes (para procedimientos como angiografía)
+        <br>• Descripción: Paneles de yeso con lámina de plomo adherida internamente, fáciles de instalar en muros existentes.</p>
+      </div>
+      
+      <div class="protection-card">
+        <img src="ventana.jpeg" alt="Vidrio Plomado" class="protection-image">
+        <h4>Vidrio Plomado</h4>
+        <p>• Marca: Ray-Bar Engineering
+        <br>• Modelo: X-Ray Lead Glass Panel (2.4 mm Pb eq.)
+        <br>• Espesor de plomo: 2.4 mm Pb equivalentes</p>
+      </div>
+      
+      <div class="protection-card">
+        <img src="puerta plomada.jpeg" alt="Puerta Plomada" class="protection-image">
+        <h4>Puerta Plomada</h4>
+        <p>• Marca: Lead Glass Pro
+        <br>• Modelo: Lead Lined Wood Door with Vision Lite
+        <br>• Espesor de plomo: 2 mm Pb equivalentes (en hoja y vidrio)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ubicacion" class="section">
+  <h2>Nuestra Ubicación</h2>
+  <p class="section-subtitle">Visítanos en nuestra clínica vascular ubicada estratégicamente para ofrecerte la mejor atención. Estamos frente al Xtra Market, en Plaza El Pazo, Carretera Panamericana, vía El Cristo.</p>
+  
+  <div class="location-content">
+    <div class="location-info">
+      <h3 style="color: #0077be; margin-bottom: 20px;">Fácil Acceso</h3>
+      <p>Nuestra clínica está estratégicamente ubicada en el centro de Aguadulce, con fácil acceso desde las principales avenidas y transporte público. Contamos con estacionamiento gratuito para nuestros pacientes.</p>
+      
+      <h3 style="color: #0077be; margin-bottom: 20px; margin-top: 30px;">Servicios Cercanos</h3>
+      <p>Nos encontramos cerca de otros servicios médicos complementarios, farmacias 24 horas, y centros comerciales, facilitando la experiencia completa de nuestros pacientes y acompañantes.</p>
+      
+      <div class="location-features">
+        <div class="feature">
+          <i class="fas fa-car"></i>
+          <div class="feature-content">
+            <h4>Estacionamiento Gratuito</h4>
+            <p>Amplio parqueadero disponible las 24 horas</p>
+          </div>
+        </div>
+        <div class="feature">
+          <i class="fas fa-bus"></i>
+          <div class="feature-content">
+            <h4>Transporte Público</h4>
+            <p>Paradas de autobús al frente de la clínica</p>
+          </div>
+        </div>
+        <div class="feature">
+          <i class="fas fa-wheelchair"></i>
+          <div class="feature-content">
+            <h4>Acceso Universal</h4>
+            <p>Instalaciones completamente accesibles</p>
+          </div>
+        </div>
+        <div class="feature">
+          <i class="fas fa-pills"></i>
+          <div class="feature-content">
+            <h4>Farmacias Cercanas</h4>
+            <p>Múltiples farmacias en un radio de 2 cuadras</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="location-map">
+      <i class="fas fa-map-marked-alt"></i>
+      <h4>Mapa Interactivo</h4>
+      <p>Vía el Cristo, Aguadulce, Provincia de Coclé<br>Aguadulce</p>
+      <a href="https://www.google.com/maps/place/V%C3%ADa+el+Cristo,+Aguadulce,+Provincia+de+Cocl%C3%A9/@8.2455825,-80.5716926,17z/data=!3m1!4b1!4m14!1m7!3m6!1s0x8fadcfa66a57e1ff:0x49803d14ad73023c!2sXtra+Market+Aguadulce!8m2!3d8.244681!4d-80.5674836!16s%2Fg%2F11fr6_p8m_!3m5!1s0x8fadcee0a1e08d25:0xf0a1e850f27ba27f!8m2!3d8.2455772!4d-80.5670792!16s%2Fg%2F11vdjnzzr7?entry=ttu&g_ep=EgoyMDI1MDYyMy4yIKXMDSoASAFQAw%3D%3D" target="_blank" class="cta-button" style="background: #0077be; color: white; margin-top: 20px;">Ver en Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<section id="personal" class="section bg-light">
+  <h2>Nuestro Personal Médico</h2>
+  <p class="section-subtitle">Conoce a nuestro equipo de profesionales altamente calificados y comprometidos con tu salud</p>
+  
+  <div class="doctors">
+    <div class="card">
+      <img src="https://via.placeholder.com/150/0077be/ffffff?text=Lic.A" alt="Lic. Nathaly Aguilar">
+      <div class="card-content">
+        <h3>Lic. Nathaly Aguilar</h3>
+        <p><strong>Lic. Enfermería</strong></p>
+        <p>Profesional en enfermería con especialización en procedimientos intervencionistas, con más de 10 años de experiencia en salas de hemodinamia y angiografía. Capacitada en asistencia estéril, monitoreo de pacientes críticos y protocolos de seguridad radiológica. Certificada por la Asociación Latinoamericana de Enfermería en Radiología.</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <img src="https://via.placeholder.com/150/009fe3/ffffff?text=Dra.M" alt="Dra. Hilary Mayorga">
+      <div class="card-content">
+        <h3>Dra. Hilary Mayorga</h3>
+        <p><strong>Médica Intervencionista</strong></p>
+        <p>Especialista en procedimientos mínimamente invasivos guiados por imagen, con más de 12 años de experiencia en el tratamiento de enfermedades vasculares. Certificada por la Sociedad Panamericana de Radiología Intervencionista.</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <img src="https://via.placeholder.com/150/ffce00/000000?text=Dra.B" alt="Dra. Estefany Bonilla">
+      <div class="card-content">
+        <h3>Dra. Estefany Bonilla</h3>
+        <p><strong>Directora Médica</strong></p>
+        <p>Médica con especialización en diagnóstico por imagen, con más de 20 años de experiencia en Rayos X y procedimientos de Angiografía. Líder en gestión de equipos de salud y en la implementación de protocolos seguros y eficientes en salas de imagenología. Certificada en Radiología Intervencionista y en Dirección Médica por instituciones nacionales e internacionales.</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <img src="https://via.placeholder.com/150/34495e/ffffff?text=Lic.C" alt="Lic. Ana Cedeño">
+      <div class="card-content">
+        <h3>Lic. Ana Cedeño</h3>
+        <p><strong>Oficial de Protección Radiológica</strong></p>
+        <p>Ingeniera especializada en seguridad radiológica, con más de 10 años de experiencia en el control de exposición a radiaciones ionizantes en entornos clínicos de Rayos X y Angiografía. Responsable de garantizar el cumplimiento de las normativas del Minsa y el Minseg, capacitar al personal en el uso seguro de equipos radiológicos y supervisar los planes de dosimetría y blindaje estructural. Acreditada por la Autoridad Nacional de Protección Radiológica.</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <img src="https://via.placeholder.com/150/e74c3c/ffffff?text=I.C" alt="Ian Castillo">
+      <div class="card-content">
+        <h3>Ian Castillo</h3>
+        <p><strong>Lic. en Biomedicina</strong></p>
+        <p>Especialista en mantenimiento, calibración y gestión de equipos médicos, con experiencia en tecnología de Rayos X, fluoroscopía y angiógrafos digitales. Encargado de asegurar el funcionamiento óptimo, la trazabilidad técnica y la seguridad operativa de los dispositivos médicos. Certificado en gestión de equipos de alta complejidad y en normativas de bioseguridad clínica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="#bienvenida">Inicio</a>
+      <a href="#sobre-nosotros">Sobre Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#equipos">Equipos</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#personal">Personal</a>
+    </div>
+    
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    
+    <p>&copy; 2024 AngioVida. Todos los derechos reservados.</p>
+    <p>Vía el Cristo, Aguadulce, Provincia de Coclé | Tel: (507) XXXX-XXXX</p>
+  </div>
+</footer>
+
+</body>
+</html>

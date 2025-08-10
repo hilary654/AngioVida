@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tour Virtual - AngioVida</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6;
+      color: #333;
+      background: #f8f9fa;
+    }
+    
+    header { 
+      background: linear-gradient(135deg, #0077be, #009fe3); 
+      color: #fff; 
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+    
+    .logo h1 {
+      font-size: 1.8em;
+      font-weight: 300;
+    }
+    
+    .back-button {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .hero-tour {
+      background: linear-gradient(rgba(0,119,190,0.9), rgba(0,159,227,0.9)), url('https://images.unsplash.com/photo-1551190822-a9333d879b1f?ixlib=rb-4.0.3') center/cover no-repeat;
+      color: #fff;
+      padding: 150px 20px 100px;
+      text-align: center;
+      margin-top: 70px;
+    }
+    
+    .hero-tour h1 {
+      font-size: 3.5em;
+      font-weight: 300;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .hero-tour p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section h2 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #0077be;
+      font-weight: 300;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.1em;
+      color: #666;
+      margin-bottom: 50px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .tour-navigation {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+    
+    .nav-button {
+      background: #fff;
+      border: 2px solid #0077be;
+      color: #0077be;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    
+    .nav-button:hover,
+    .nav-button.active {
+      background: #0077be;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,119,190,0.3);
+    }
+    
+    .tour-section {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    .tour-section.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: #fff;
+      padding: 30px 20px 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    
+    .gallery-overlay h4 {
+      font-size: 1.3em;
+      margin-bottom: 8px;
+    }
+    
+    .gallery-overlay p {
+      font-size: 0.9em;
+      opacity: 0.9;
+    }
+    
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    
+    .video-placeholder {
+      width: 100%;
+      height: 450px;
+      background: linear-gradient(135deg, #0077be, #009fe3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .video-placeholder:hover {
+      background: linear-gradient(135deg, #005a8c, #007bb8);
+    }
+    
+    .video-placeholder i {
+      font-size: 4em;
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+    
+    .video-placeholder h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+    
+    .video-placeholder p {
+      opacity: 0.8;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .feature-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .feature-card i {
+      font-size: 3em;
+      color: #0077be;
+      margin-bottom: 20px;
+    }
+    
+    .feature-card h4 {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .virtual-tour {
+      background: #fff;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    .tour-360 {
+      width: 100%;
+      height: 500px;
+      background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #666;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .tour-360:hover {
+      background: linear-gradient(45deg, #0077be, #009fe3);
+      color: #fff;
+    }
+    
+    .tour-360 i {
+      font-size: 4em;
+      margin-bottom: 20px;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+    }
+    
+    .modal-content {
+      position: relative;
+      margin: 2% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 1000px;
+    }
+    
+    .modal img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      color: #fff;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close:hover {
+      color: #ffce00;
+    }
+    
+    .bg-white {
+      background: #fff;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-tour h1 {
+        font-size: 2.5em;
+      }
+      
+      .tour-navigation {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 5% auto;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="logo">
+      <h1><i class="fas fa-heartbeat"></i> AngioVida - Tour Virtual</h1>
+    </div>
+    <a href="index.html" class="back-button">
+      <i class="fas fa-arrow-left"></i>
+      Volver al Inicio
+    </a>
+  </div>
+</header>
+
+<section class="hero-tour">
+  <h1>Tour Virtual de Nuestra Clínica</h1>
+  <p>Conoce nuestras modernas instalaciones y tecnología de vanguardia desde la comodidad de tu hogar</p>
+</section>
+
+<section class="section">
+  <div class="tour-navigation">
+    <button class="nav-button active" onclick="showSection('recepcion')">Recepción</button>
+    <button class="nav-button" onclick="showSection('salas')">Salas de Procedimientos</button>
+    <button class="nav-button" onclick="showSection('equipos')">Equipos Médicos</button>
+    <button class="nav-button" onclick="showSection('areas')">Áreas Especializadas</button>
+    <button class="nav-button" onclick="showSection('tour360')">Tour 360°</button>
+  </div>
+
+  <!-- Sección Recepción -->
+  <div id="recepcion" class="tour-section active">
+    <h2>Área de Recepción y Espera</h2>
+    <p class="section-subtitle">Un ambiente cómodo y moderno donde nuestros pacientes son recibidos con la mejor atención</p>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openModal('recepcion - Acceso directo.lnk')">
+        <img src="recepcion.jpeg">
+        <div class="gallery-overlay">
+          <h4>Recepción Principal</h4>
+          <p>Área de registro y atención al paciente con personal especializado disponible las 24 horas</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" onclick="openModal('Sala espera - Acceso directo.lnk')">
+        <img src="Sala espera.jpeg" alt="Sala de Espera">
+        <div class="gallery-overlay">
+          <h4>Sala de Espera</h4>
+          <p>Espacio cómodo con asientos ergonómicos, WiFi gratuito y entretenimiento para pacientes y familiares</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" onclick="openModal('consultorios - Acceso directo.lnk')">
+        <img src="consultorios.jpeg">
+        <div class="gallery-overlay">
+          <h4>Consultorios</h4>
+          <p>Atención especializada en diagnóstico por imagen con tecnología avanzada en rayos X y angiografía. Seguridad, precisión y trato humano en cada estudio.
+
+</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección Salas de Procedimientos -->
+  <div id="salas" class="tour-section">
+    <h2>Salas de Procedimientos</h2>
+    <p class="section-subtitle">Instalaciones especializadas equipadas con la más alta tecnología médica</p>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openModal('Angigrafo - Acceso directo.lnk')">
+        <img src="angiografia.jpeg" alt="Sala de Angiografía">
+        <div class="gallery-overlay">
+          <h4>Sala de Angiografía</h4>
+          <p>Sala especializada con equipo de angiografía digital de última generación y sistemas de protección radiológica</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" onclick="openModal('rayos x - Acceso directo.lnk')">
+        <img src="rayos x.jpg" alt="Sala de Rayos X">
+        <div class="gallery-overlay">
+          <h4>Sala de Rayos X</h4>
+          <p>Sala de radiografía convencional con sistema digital y mesa multifuncional</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" onclick="openModal('Recuperacion - Acceso directo.lnk')">
+        <img src="Recuperacion.jpeg">
+        <div class="gallery-overlay">
+          <h4>Sala de Recuperación</h4>
+          <p>Espacio destinado a la vigilancia y cuidado de pacientes tras procedimientos médicos, asegurando su estabilidad antes del alta.
+
+</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección Equipos Médicos -->
+  <div id="equipos" class="tour-section">
+    <h2>Equipos Médicos de Vanguardia</h2>
+    <p class="section-subtitle">Tecnología de última generación para diagnósticos precisos y tratamientos seguros</p>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1583912086296-dcaa2c2c8fce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800')">
+        <img src="https://images.unsplash.com/photo-1583912086296-dcaa2c2c8fce?ixlib=rb-4.0.3&auto=format&fit=crop&w=400" alt="Angiógrafo Digital">
+        <div class="gallery-overlay">
+          <h4>Angiógrafo Digital</h4>
+          <p>Equipo de angiografía con tecnología de sustracción digital y brazo en C motorizado</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixlib=rb-4.0.3&auto=format&fit=crop&w=800')">
+        <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixlib=rb-4.0.3&auto=format&fit=crop&w=400" alt="Equipo de Rayos X">
+        <div class="gallery-overlay">
+          <h4>Equipo de Rayos X Digital</h4>
+          <p>Sistema de radiografía digital con detector de panel plano para imágenes de alta resolución</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800')">
+        <img src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400" alt="Sistema PACS">
+        <div class="gallery-overlay">
+          <h4>Sistema PACS</h4>
+          <p>Sistema de archivo y comunicación de imágenes médicas para gestión digital completa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección Áreas Especializadas -->
+  <div id="areas" class="tour-section">
+    <h2>Áreas Especializadas</h2>
+    <p class="section-subtitle">Espacios diseñados específicamente para garantizar la seguridad y comodidad</p>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="fas fa-shield-alt"></i>
+        <h4>Protección Radiológica</h4>
+        <p>Todas nuestras instalaciones cuentan con paredes plomadas, vidrios especializados y puertas de protección radiológica cumpliendo con las normativas internacionales.</p>
+      </div>
+      
+      <div class="feature-card">
+        <i class="fas fa-wind"></i>
+        <h4>Sistema de Ventilación</h4>
+        <p>Sistemas de climatización y purificación de aire de grado médico que mantienen ambientes estériles y confortables.</p>
+      </div>
+      
+      <div class="feature-card">
+        <i class="fas fa-lightbulb"></i>
+        <h4>Iluminación Especializada</h4>
+        <p>Sistemas de iluminación LED médica que proporcionan la intensidad y temperatura de color óptima para cada procedimiento.</p>
+      </div>
+      
+      <div class="feature-card">
+        <i class="fas fa-door-open"></i>
+        <h4>Accesibilidad Universal</h4>
+        <p>Todas nuestras instalaciones están diseñadas para garantizar el acceso completo a personas con movilidad reducida.</p>
+      </div>
+      
+      <div class="feature-card">
+        <i class="fas fa-video"></i>
+        <h4>Sistemas de Monitoreo</h4>
+        <p>Cámaras de seguridad y sistemas de monitoreo que garantizan la seguridad de pacientes y personal.</p>
+      </div>
+      
+      <div class="feature-card">
+        <i class="fas fa-wifi"></i>
+        <h4>Conectividad Total</h4>
+        <p>Red WiFi de alta velocidad y sistemas de comunicación digital para una experiencia completamente conectada.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección Tour 360° -->
+  <div id="tour360" class="tour-section">
+    <h2>Recorrido Virtual 360°</h2>
+    <p class="section-subtitle">Experimenta un recorrido inmersivo por todas nuestras instalaciones</p>
+    
+    <div class="virtual-tour">
+      <div class="tour-360" onclick="alert('Función de tour 360° próximamente disponible. Por favor contacte con nosotros para agendar una visita presencial.')">
+        <i class="fas fa-360-degrees"></i>
+        <h3>Tour Interactivo 360°</h3>
+        <p>Haz clic para iniciar el recorrido virtual completo</p>
+        <small style="margin-top: 15px; opacity: 0.7;">*Requiere dispositivo compatible con realidad virtual</small>
+      </div>
+      <p style="margin-top: 20px; color: #666;">Navega por nuestras instalaciones usando controles táctiles o de mouse. Descubre cada rincón de nuestra moderna clínica desde cualquier ángulo.</p>
+    </div>
+
+    <div class="video-container" style="margin-top: 50px;">
+      <div class="video-placeholder" onclick="alert('Video de presentación próximamente disponible')">
+        <i class="fas fa-play"></i>
+        <h3>Video Presentación de la Clínica</h3>
+        <p>Conoce nuestra historia, equipo médico y tecnología</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal para imágenes -->
+<div id="imageModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="" alt="Imagen ampliada">
+  </div>
+</div>
+
+<footer style="background: linear-gradient(135deg, #2c3e50, #34495e); color: #fff; text-align: center; padding: 40px 20px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <p style="margin-bottom: 20px;"><strong>¿Quieres visitarnos en persona?</strong></p>
+    <p style="margin-bottom: 20px;">Agenda una cita para conocer personalmente nuestras instalaciones y hablar directamente con nuestros especialistas.</p>
+    <a href="index.html" style="background: #ffce00; color: #000; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; margin: 10px;">Agendar Cita Presencial</a>
+    <p style="margin-top: 30px; opacity: 0.8;">&copy; 2024 AngioVida. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  function showSection(sectionId) {
+    // Ocultar todas las secciones
+    const sections = document.querySelectorAll('.tour-section');
+    sections.forEach(section => {
+      section.classList.remove('active');
+    });
+    
+    // Remover clase active de todos los botones
+    const buttons = document.querySelectorAll('.nav-button');
+    buttons.forEach(button => {
+      button.classList.remove('active');
+    });
+    
+    // Mostrar la sección seleccionada
+    document.getElementById(sectionId).classList.add('active');
+    
+    // Agregar clase active al botón correspondiente
+    event.target.classList.add('active');
+  }
+  
+  function openModal(imageSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    
+    modal.style.display = 'block';
+    modalImage.src = imageSrc;
+  }
+  
+  function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+  }
+  
+  // Cerrar modal al hacer clic fuera de la imagen
+  window.onclick = function(event) {
+    const modal = document.getElementById('imageModal');
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+  
+  // Cerrar modal con tecla Escape
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+</script>
+
+</body>
+</html>
