@@ -211,6 +211,38 @@
       opacity: 0.9;
     }
     
+    .map-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .single-map-item {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+    }
+    
+    .single-map-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    }
+    
+    .single-map-item img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .single-map-item:hover img {
+      transform: scale(1.05);
+    }
+    
     .video-container {
       position: relative;
       width: 100%;
@@ -391,6 +423,10 @@
         width: 95%;
         margin: 5% auto;
       }
+      
+      .single-map-item img {
+        height: 300px;
+      }
     }
   </style>
 </head>
@@ -416,7 +452,6 @@
   <div class="tour-navigation">
     <button class="nav-button active" onclick="showSection('recepcion')">Recepción</button>
     <button class="nav-button" onclick="showSection('salas')">Salas de Procedimientos</button>
-    <button class="nav-button" onclick="showSection('equipos')">Equipos Médicos</button>
     <button class="nav-button" onclick="showSection('areas')">Áreas Especializadas</button>
     <button class="nav-button" onclick="showSection('tour360')">Mapa de la Clínica</button>
   </div>
@@ -447,9 +482,7 @@
         <img src="consultorios.jpeg">
         <div class="gallery-overlay">
           <h4>Consultorios</h4>
-          <p>Atención especializada en diagnóstico por imagen con tecnología avanzada en rayos X y angiografía. Seguridad, precisión y trato humano en cada estudio.
-
-</p>
+          <p>Atención especializada en diagnóstico por imagen con tecnología avanzada en rayos X y angiografía. Seguridad, precisión y trato humano en cada estudio.</p>
         </div>
       </div>
     </div>
@@ -481,45 +514,13 @@
         <img src="Recuperacion.jpeg">
         <div class="gallery-overlay">
           <h4>Sala de Recuperación</h4>
-          <p>Espacio destinado a la vigilancia y cuidado de pacientes tras procedimientos médicos, asegurando su estabilidad antes del alta.
-
-</p>
+          <p>Espacio destinado a la vigilancia y cuidado de pacientes tras procedimientos médicos, asegurando su estabilidad antes del alta.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Sección Equipos Médicos -->
-  <div id="equipos" class="tour-section">
-    <h2>Equipos Médicos de Vanguardia</h2>
-    <p class="section-subtitle">Tecnología de última generación para diagnósticos precisos y tratamientos seguros</p>
-    
-    <div class="gallery-grid">
-      <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1583912086296-dcaa2c2c8fce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800')">
-        <img src="https://images.unsplash.com/photo-1583912086296-dcaa2c2c8fce?ixlib=rb-4.0.3&auto=format&fit=crop&w=400" alt="Angiógrafo Digital">
-        <div class="gallery-overlay">
-          <h4>Angiógrafo Digital</h4>
-          <p>Equipo de angiografía con tecnología de sustracción digital y brazo en C motorizado</p>
-        </div>
-      </div>
-      
-      <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixlib=rb-4.0.3&auto=format&fit=crop&w=800')">
-        <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixlib=rb-4.0.3&auto=format&fit=crop&w=400" alt="Equipo de Rayos X">
-        <div class="gallery-overlay">
-          <h4>Equipo de Rayos X Digital</h4>
-          <p>Sistema de radiografía digital con detector de panel plano para imágenes de alta resolución</p>
-        </div>
-      </div>
-      
-      <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800')">
-        <img src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400" alt="Sistema PACS">
-        <div class="gallery-overlay">
-          <h4>Sistema PACS</h4>
-          <p>Sistema de archivo y comunicación de imágenes médicas para gestión digital completa</p>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- Sección Áreas Especializadas -->
   <div id="areas" class="tour-section">
@@ -570,79 +571,16 @@
   <h2>Mapa de la Clínica</h2>
   <p class="section-subtitle">Conoce la distribución de nuestras instalaciones y rutas de emergencia</p>
   
-  <div class="gallery-grid">
-    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200')">
-      <img src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400" alt="Plano General de la Clínica">
+  <div class="map-container">
+    <div class="single-map-item" onclick="openModal('MAPA - Acceso directo.lnk')">
+      <img src="MAPA.png" alt="Mapa General de la Clínica">
       <div class="gallery-overlay">
         <h4>Plano General de la Clínica</h4>
-        <p>Vista completa de la distribución de todas nuestras áreas y departamentos</p>
-      </div>
-    </div>
-    
-    <div class="gallery-item" onclick="openModal('Evacuacion - Acceso directo.lnk')">
-      <img src="Evacuacion.jpeg">
-      <div class="gallery-overlay">
-        <h4>Salidas de Emergencia</h4>
-        <p>Ubicación de todas las salidas de emergencia y rutas de evacuación segura</p>
-      </div>
-    </div>
-    
-    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200')">
-      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400" alt="Mapa Interactivo">
-      <div class="gallery-overlay">
-        <h4>Mapa Interactivo</h4>
-        <p>Navegación detallada por pisos y ubicación de servicios específicos</p>
+        <p>Vista completa de la distribución de todas nuestras áreas, departamentos y rutas de evacuación</p>
       </div>
     </div>
   </div>
 
-  <div class="features-grid" style="margin-top: 50px;">
-    <div class="feature-card">
-      <i class="fas fa-map-marked-alt"></i>
-      <h4>Planta Baja</h4>
-      <p>Recepción, sala de espera, consultorios externos, cafetería y servicios administrativos.</p>
-    </div>
-    
-    <div class="feature-card">
-      <i class="fas fa-procedures"></i>
-      <h4>Primer Piso</h4>
-      <p>Salas de angiografía, rayos X, laboratorios y áreas de preparación de pacientes.</p>
-    </div>
-    
-    <div class="feature-card">
-      <i class="fas fa-user-md"></i>
-      <h4>Segundo Piso</h4>
-      <p>Oficinas médicas, sala de juntas, archivo médico y área de descanso del personal.</p>
-    </div>
-    
-    <div class="feature-card">
-      <i class="fas fa-route"></i>
-      <h4>Rutas de Acceso</h4>
-      <p>Múltiples accesos vehiculares y peatonales, con estacionamiento para pacientes y visitantes.</p>
-    </div>
-    
-    <div class="feature-card">
-      <i class="fas fa-door-open"></i>
-      <h4>Salidas de Emergencia</h4>
-      <p>6 salidas de emergencia estratégicamente ubicadas con señalización luminosa y rutas despejadas.</p>
-    </div>
-    
-    <div class="feature-card">
-      <i class="fas fa-wheelchair"></i>
-      <h4>Accesibilidad</h4>
-      <p>Ascensores, rampas y pasillos amplios diseñados para garantizar acceso universal.</p>
-    </div>
-  </div>
-
-  <div class="virtual-tour" style="margin-top: 50px;">
-    <div class="tour-360" onclick="alert('Descarga el mapa detallado contactando con recepción')">
-      <i class="fas fa-download"></i>
-      <h3>Descargar Mapa Completo</h3>
-      <p>Obtén una copia del plano completo en formato PDF</p>
-      <small style="margin-top: 15px; opacity: 0.7;">*Incluye leyenda y numeración de áreas</small>
-    </div>
-  </div>
-</div>
 
 <!-- Modal para imágenes -->
 <div id="imageModal" class="modal">
